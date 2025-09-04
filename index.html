@@ -2,64 +2,59 @@
 <html lang="sv">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panik-knapp 2</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 2rem;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panik-knapp 2</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+        }
 
-    #panic-button {
-      background: #e11d48;
-      color: white;
-      border: none;
-      padding: 1rem 1.5rem;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+        #panic-button {
+            background: #e11d48;
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-    #panic-button:hover {
-      background: #be123c;
-    }
-  </style>
+        #panic-button:hover {
+            background: #be123c;
+        }
+    </style>
 </head>
 
 <body>
-  <p>
-    <button id="panic-button" title="Tryck ESC eller klicka för att lämna sidan snabbt"
-      data-url="https://www.google.com">
-      Lämna sidan snabbt
-    </button>
-  </p>
+    <p>
+        <button id="panic-button" title="Tryck ESC eller klicka för att lämna sidan snabbt">
+            Lämna sidan snabbt
+        </button>
+    </p>
 
-  <script>
-    (function () {
-      const btn = document.getElementById('panic-button');
-      const url = btn.dataset.url || "https://www.google.com";
-      const HOTKEY = 'Escape';
+    <script>
+        (function () {
+            const btn = document.getElementById('panic-button');
+            if (!btn) return;
 
-      function panic() {
-        // Ersätt nuvarande historikpost med den säkra sidan
-        location.replace(url);
-        return false;
-      }
+            const SAFE_URL = 'https://www.google.com';
+            const HOTKEY = 'Escape';
 
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        panic();
-      });
+            function panic() {
+                location.replace(SAFE_URL);
+            }
 
-      document.addEventListener('keydown', function (e) {
-        if (e.key === HOTKEY || e.keyCode === 27) {
-          e.preventDefault();
-          panic();
-        }
-      });
-    })();
-  </script>
+            btn.addEventListener('click', e => { e.preventDefault(); panic(); });
+            document.addEventListener('keydown', e => {
+                if (e.key === HOTKEY || e.keyCode === 27) {
+                    e.preventDefault();
+                    panic();
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
